@@ -39,7 +39,7 @@ docker_build:
 	docker build -t hello-world-printer-k7-2026 .
 
 TAG=$(USERNAME)/hello-world-printer-k7-2026
-docker_push: docker_build
-	echo "$$DOCKER_PASSWORD" | docker login -u "$$DOCKER_LOGIN" --password-stdin
-	docker tag hello-world-printer-k7-2026 "$$DOCKER_LOGIN/hello-world-printer-k7-2026:latest"
-	docker push "$$DOCKER_LOGIN/hello-world-printer-k7-2026:latest"
+docker_push:
+	docker login -u $(DOCKER_LOGIN) -p $(DOCKER_PASSWORD)
+	docker tag hello-world-printer-k7-2026 $(DOCKER_LOGIN)/hello-world-printer-k7-2026:latest
+	docker push $(DOCKER_LOGIN)/hello-world-printer-k7-2026:latest
